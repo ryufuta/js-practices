@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 export const fizzbuzz = (number) => {
   if (number % 15 === 0) {
     return "FizzBuzz";
