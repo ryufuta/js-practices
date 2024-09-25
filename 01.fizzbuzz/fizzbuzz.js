@@ -9,3 +9,9 @@ export const fizzbuzz = (number) => {
     return String(number);
   }
 };
+
+if (process.argv[1] === import.meta.filename) {
+  for (let i = 1; i < 21; i++) {
+    console.log(fizzbuzz(i));
+  }
+}
