@@ -10,7 +10,7 @@ test("converts a multiple of 5 to Buzz", () => {
   assert.strictEqual(fizzbuzz(5), "Buzz");
 });
 
-test("converts a multiple of 15 to FizzBuzz", () => {
+test("converts a multiple of 3 and 5 to FizzBuzz", () => {
   assert.strictEqual(fizzbuzz(15), "FizzBuzz");
 });
 
