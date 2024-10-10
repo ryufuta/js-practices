@@ -28,10 +28,8 @@ const arrangeDates = (year, month) => {
     }
   }
   const totalRows = 6;
-  if (rows.length < totalRows) {
-    rows.push("");
-  }
-  return rows;
+  const emptyRows = new Array(totalRows - rows.length).fill("");
+  return rows.concat(emptyRows);
 };
 
 if (import.meta.filename === process.argv[1]) {
