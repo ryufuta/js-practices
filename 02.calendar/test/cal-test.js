@@ -27,3 +27,16 @@ test("2023_11", () => {
 `;
   assert.strictEqual(cal(2023, 11), expected);
 });
+
+// 最終2行が空行
+test("1970_2", () => {
+  const expected = `      2月 1970
+日 月 火 水 木 金 土
+ 1  2  3  4  5  6  7
+ 8  9 10 11 12 13 14
+15 16 17 18 19 20 21
+22 23 24 25 26 27 28
+
+`;
+  assert.strictEqual(cal(1970, 2), expected);
+});
