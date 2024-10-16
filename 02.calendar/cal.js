@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import parseArgs from "minimist";
+import minimist from "minimist";
 
 export const cal = (year, month) => {
   return [
@@ -40,6 +40,6 @@ if (import.meta.filename === process.argv[1]) {
       m: today.getMonth() + 1,
     },
   };
-  const params = parseArgs(process.argv.slice(2), options);
+  const params = minimist(process.argv.slice(2), options);
   console.log(cal(params.y, params.m));
 }
