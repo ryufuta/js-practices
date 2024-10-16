@@ -13,13 +13,13 @@ export const buildCalendar = (year, month) => {
 const buildCalendarBody = (year, month) => {
   const saturday = 6;
   const firstDayOfWeek = new Date(year, month - 1, 1).getDay();
-  const last_date = new Date(year, month, 0).getDate();
+  const lastDate = new Date(year, month, 0).getDate();
   let rows = [];
   let row = new Array(firstDayOfWeek).fill("  ");
   let dayOfWeek = firstDayOfWeek;
-  for (let i = 1; i <= last_date; i++) {
+  for (let i = 1; i <= lastDate; i++) {
     row.push(String(i).padStart(2));
-    if (dayOfWeek === saturday || i === last_date) {
+    if (dayOfWeek === saturday || i === lastDate) {
       rows.push(row.join(" "));
       row = [];
       dayOfWeek = 0;
