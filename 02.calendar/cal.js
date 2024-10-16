@@ -2,7 +2,7 @@
 
 import minimist from "minimist";
 
-export const cal = (year, month) => {
+export const buildCalendar = (year, month) => {
   return [
     `      ${month}月 ${year}`,
     "日 月 火 水 木 金 土",
@@ -40,5 +40,5 @@ if (import.meta.filename === process.argv[1]) {
       m: today.getMonth() + 1,
     },
   });
-  console.log(cal(params.y, params.m));
+  console.log(buildCalendar(params.y, params.m));
 }

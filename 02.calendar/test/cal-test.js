@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import * as assert from "node:assert";
-import { cal } from "../cal.js";
+import { buildCalendar } from "../cal.js";
 
 // 月が1桁
 test("2024_3", () => {
@@ -12,7 +12,7 @@ test("2024_3", () => {
 17 18 19 20 21 22 23
 24 25 26 27 28 29 30
 31`;
-  assert.strictEqual(cal(2024, 3), expected);
+  assert.strictEqual(buildCalendar(2024, 3), expected);
 });
 
 // 月が2桁、最終行が空行
@@ -25,7 +25,7 @@ test("2023_11", () => {
 19 20 21 22 23 24 25
 26 27 28 29 30
 `;
-  assert.strictEqual(cal(2023, 11), expected);
+  assert.strictEqual(buildCalendar(2023, 11), expected);
 });
 
 // 最終2行が空行
@@ -38,5 +38,5 @@ test("1970_2", () => {
 22 23 24 25 26 27 28
 
 `;
-  assert.strictEqual(cal(1970, 2), expected);
+  assert.strictEqual(buildCalendar(1970, 2), expected);
 });
