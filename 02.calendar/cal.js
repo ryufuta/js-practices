@@ -34,12 +34,11 @@ const arrangeDates = (year, month) => {
 
 if (import.meta.filename === process.argv[1]) {
   const today = new Date();
-  const options = {
+  const params = minimist(process.argv.slice(2), {
     default: {
       y: today.getFullYear(),
       m: today.getMonth() + 1,
     },
-  };
-  const params = minimist(process.argv.slice(2), options);
+  });
   console.log(cal(params.y, params.m));
 }
