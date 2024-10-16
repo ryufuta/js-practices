@@ -6,11 +6,11 @@ export const buildCalendar = (year, month) => {
   return [
     `      ${month}月 ${year}`,
     "日 月 火 水 木 金 土",
-    ...arrangeDates(year, month),
+    ...buildCalendarBody(year, month),
   ].join("\n");
 };
 
-const arrangeDates = (year, month) => {
+const buildCalendarBody = (year, month) => {
   const saturDay = 6;
   const firstDayOfWeek = new Date(year, month - 1, 1).getDay();
   const last_date = new Date(year, month, 0).getDate();
