@@ -12,21 +12,19 @@ export const buildCalendar = (year, month) => {
 
 const buildCalendarBody = (year, month) => {
   const saturday = 6;
-  const firstDayOfWeek = new Date(year, month - 1, 1).getDay();
-  const lastDate = new Date(year, month, 0).getDate();
+  const firstDate = new Date(year, month - 1, 1);
+  const lastDate = new Date(year, month, 0);
   let rows = [];
-  let row = new Array(firstDayOfWeek).fill("  ");
-  let dayOfWeek = firstDayOfWeek;
-  for (let i = 1; i <= lastDate; i++) {
-    row.push(String(i).padStart(2));
-    if (dayOfWeek === saturday || i === lastDate) {
-      rows.push(row.join(" "));
-      row = [];
-      dayOfWeek = 0;
-    } else {
-      dayOfWeek++;
-    }
-  }
+  let row = new Array(firstDate.getDay()).fill("  ");
+  [...Array(lastDate.getDate())]
+    .map((_, i) => new Date(year, month - 1, i + 1))
+    .forEach((date) => {
+      row.push(String(date.getDate()).padStart(2));
+      if (date.getDay() === saturday || date.getDate() === lastDate.getDate()) {
+        rows.push(row.join(" "));
+        row = [];
+      }
+    });
   const totalRows = 6;
   const emptyRows = new Array(totalRows - rows.length).fill("");
   return rows.concat(emptyRows);
