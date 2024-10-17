@@ -14,7 +14,7 @@ const buildCalendarBody = (year, month) => {
   const saturday = 6;
   const firstDate = new Date(year, month - 1, 1);
   const lastDate = new Date(year, month, 0);
-  let rows = [];
+  const rows = [];
   let datesPerWeek = new Array(firstDate.getDay()).fill("  ");
   [...Array(lastDate.getDate())]
     .map((_, i) => new Date(year, month - 1, i + 1))
