@@ -26,8 +26,7 @@ const buildCalendarBody = (year, month) => {
       }
     });
   const totalRows = 6;
-  const emptyRows = new Array(totalRows - rows.length).fill("");
-  return rows.concat(emptyRows);
+  return rows.concat(new Array(totalRows - rows.length).fill(""));
 };
 
 if (import.meta.filename === process.argv[1]) {
