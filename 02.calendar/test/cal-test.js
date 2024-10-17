@@ -2,8 +2,7 @@ import { test } from "node:test";
 import * as assert from "node:assert";
 import { buildCalendar } from "../cal.js";
 
-// 月が1桁
-test("2024_3", () => {
+test("2024_3 calendar with no blank lines", () => {
   const expected = `      3月 2024
 日 月 火 水 木 金 土
                 1  2
@@ -15,8 +14,7 @@ test("2024_3", () => {
   assert.strictEqual(buildCalendar(2024, 3), expected);
 });
 
-// 月が2桁、最終行が空行
-test("2023_11", () => {
+test("2023_11 calendar with a blank line", () => {
   const expected = `      11月 2023
 日 月 火 水 木 金 土
           1  2  3  4
@@ -28,8 +26,7 @@ test("2023_11", () => {
   assert.strictEqual(buildCalendar(2023, 11), expected);
 });
 
-// 最終2行が空行
-test("1970_2", () => {
+test("1970_2 calendar with two blank lines", () => {
   const expected = `      2月 1970
 日 月 火 水 木 金 土
  1  2  3  4  5  6  7
