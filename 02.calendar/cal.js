@@ -14,15 +14,15 @@ const buildCalendarBody = (year, month) => {
   const saturday = 6;
   const firstDate = new Date(year, month - 1, 1);
   const lastDate = new Date(year, month, 0);
-  let datesPerWeek = Array(firstDate.getDay()).fill("  ");
+  let dateStringsPerRow = Array(firstDate.getDay()).fill("  ");
   const rows = [];
   [...Array(lastDate.getDate())]
     .map((_, i) => new Date(year, month - 1, i + 1))
     .forEach((date) => {
-      datesPerWeek.push(String(date.getDate()).padStart(2));
+      dateStringsPerRow.push(String(date.getDate()).padStart(2));
       if (date.getDay() === saturday || date.getDate() === lastDate.getDate()) {
-        rows.push(datesPerWeek.join(" "));
-        datesPerWeek = [];
+        rows.push(dateStringsPerRow.join(" "));
+        dateStringsPerRow = [];
       }
     });
   const totalRows = 6;
