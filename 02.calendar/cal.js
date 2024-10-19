@@ -14,7 +14,7 @@ const buildCalendarBody = (year, month) => {
   const saturday = 6;
   const firstDate = new Date(year, month - 1, 1);
   const lastDate = new Date(year, month, 0);
-  let datesPerWeek = new Array(firstDate.getDay()).fill("  ");
+  let datesPerWeek = Array(firstDate.getDay()).fill("  ");
   const rows = [];
   [...Array(lastDate.getDate())]
     .map((_, i) => new Date(year, month - 1, i + 1))
@@ -26,7 +26,7 @@ const buildCalendarBody = (year, month) => {
       }
     });
   const totalRows = 6;
-  return rows.concat(new Array(totalRows - rows.length).fill(""));
+  return rows.concat(Array(totalRows - rows.length).fill(""));
 };
 
 if (import.meta.filename === process.argv[1]) {
