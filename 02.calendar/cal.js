@@ -6,7 +6,7 @@ export const buildCalendar = (year, month) => {
   return [
     `      ${month}月 ${year}`,
     "日 月 火 水 木 金 土",
-    ...buildCalendarBody(year, month),
+    buildCalendarBody(year, month),
   ].join("\n");
 };
 
@@ -27,7 +27,7 @@ const buildCalendarBody = (year, month) => {
     rows.push(dateStringsPerRow.join(" "));
   }
   const totalRows = 6;
-  return rows.concat(Array(totalRows - rows.length).fill(""));
+  return rows.concat(Array(totalRows - rows.length).fill("")).join("\n");
 };
 
 if (import.meta.filename === process.argv[1]) {
