@@ -4,10 +4,13 @@ import minimist from "minimist";
 
 export const buildCalendar = (year, month) => {
   return [
-    `      ${month}月 ${year}`,
-    "日 月 火 水 木 金 土",
+    buildCalendarHeader(year, month),
     buildCalendarBody(year, month),
   ].join("\n");
+};
+
+const buildCalendarHeader = (year, month) => {
+  return [`      ${month}月 ${year}`, "日 月 火 水 木 金 土"].join("\n");
 };
 
 const buildCalendarBody = (year, month) => {
