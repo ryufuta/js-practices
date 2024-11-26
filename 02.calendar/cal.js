@@ -30,7 +30,8 @@ const buildCalendarBody = (year, month) => {
     rows.push(dateStringsPerRow.join(" "));
   }
   const totalRows = 6;
-  return rows.concat(Array(totalRows - rows.length).fill("")).join("\n");
+  const rowsOfEmptyString = Array(totalRows - rows.length).fill("");
+  return rows.concat(rowsOfEmptyString).join("\n");
 };
 
 if (import.meta.filename === process.argv[1]) {
