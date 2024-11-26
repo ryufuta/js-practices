@@ -24,14 +24,14 @@ const buildCalendarBody = (year, month) => {
   ];
 
   const dayCountPerRow = 7;
-  const rows = [];
+  const rowsOfDateString = [];
   for (let start = 0; start < dateStrings.length; start += dayCountPerRow) {
     const dateStringsPerRow = dateStrings.slice(start, start + dayCountPerRow);
-    rows.push(dateStringsPerRow.join(" "));
+    rowsOfDateString.push(dateStringsPerRow.join(" "));
   }
   const totalRows = 6;
-  const rowsOfEmptyString = Array(totalRows - rows.length).fill("");
-  return rows.concat(rowsOfEmptyString).join("\n");
+  const rowsOfEmptyString = Array(totalRows - rowsOfDateString.length).fill("");
+  return rowsOfDateString.concat(rowsOfEmptyString).join("\n");
 };
 
 if (import.meta.filename === process.argv[1]) {
