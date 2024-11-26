@@ -31,7 +31,7 @@ const buildCalendarBody = (year, month) => {
   }
   const totalRows = 6;
   const rowsOfEmptyString = Array(totalRows - rowsOfDateString.length).fill("");
-  return rowsOfDateString.concat(rowsOfEmptyString).join("\n");
+  return [...rowsOfDateString, ...rowsOfEmptyString].join("\n");
 };
 
 if (import.meta.filename === process.argv[1]) {
