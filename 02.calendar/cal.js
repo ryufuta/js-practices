@@ -25,7 +25,7 @@ const buildCalendarBody = (year, month) => {
 
   const dayCountPerRow = 7;
   const rows = [];
-  while (dateStrings.length) {
+  while (dateStrings.length > 0) {
     const dateStringsPerRow = dateStrings.splice(0, dayCountPerRow);
     rows.push(dateStringsPerRow.join(" "));
   }
