@@ -23,10 +23,10 @@ const buildCalendarBody = (year, month) => {
     ),
   ];
 
-  const dayCountsPerWeek = 7;
+  const dayCountPerRow = 7;
   const rows = [];
   while (dateStrings.length) {
-    const dateStringsPerRow = dateStrings.splice(0, dayCountsPerWeek);
+    const dateStringsPerRow = dateStrings.splice(0, dayCountPerRow);
     rows.push(dateStringsPerRow.join(" "));
   }
   const totalRows = 6;
