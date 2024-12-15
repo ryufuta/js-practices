@@ -25,13 +25,10 @@ try {
 } catch (error) {
   console.error(`レコード追加時のエラー: ${error.message}`);
 }
-
 try {
   await dbGetWithPromise(db, "SELECT content FROM books");
 } catch (error) {
   console.error(`レコード取得時のエラー: ${error.message}`);
 }
-
 await dbRunWithPromise(db, "DROP TABLE books");
-
 db.close();
