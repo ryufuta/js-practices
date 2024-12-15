@@ -6,12 +6,12 @@ const db = new sqlite3.Database(":memory:");
 
 // エラーなしのプログラム
 await dbRunWithPromise(db, "CREATE TABLE books (title TEXT NOT NULL UNIQUE)");
-const value = await dbRunWithPromise(
+const result = await dbRunWithPromise(
   db,
   "INSERT INTO books VALUES (?)",
   "JavaScript Primer",
 );
-console.log(`自動採番されたID: ${value.lastID}`);
+console.log(`自動採番されたID: ${result.lastID}`);
 const row = await dbGetWithPromise(db, "SELECT rowid AS id, title FROM books");
 console.log(`取得したレコード: id: ${row.id}, title: ${row.title}`);
 await dbRunWithPromise(db, "DROP TABLE books");
