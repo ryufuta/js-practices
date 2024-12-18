@@ -15,7 +15,7 @@ dbRunWithPromise(db, "CREATE TABLE books (title TEXT NOT NULL UNIQUE)")
   })
   .then((row) => {
     console.log(`取得したレコード: id: ${row.id}, title: ${row.title}`);
-    dbRunWithPromise(db, "DROP TABLE books");
+    return dbRunWithPromise(db, "DROP TABLE books");
   });
 
 await timers.setTimeout(100);
@@ -29,6 +29,6 @@ dbRunWithPromise(db, "CREATE TABLE books (title TEXT NOT NULL UNIQUE)")
   })
   .catch((error) => {
     console.error(`レコード取得時のエラー: ${error.message}`);
-    dbRunWithPromise(db, "DROP TABLE books");
+    return dbRunWithPromise(db, "DROP TABLE books");
   })
   .finally(() => db.close());
