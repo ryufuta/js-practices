@@ -1,4 +1,3 @@
-import timers from "timers/promises";
 import sqlite3 from "sqlite3";
 import {
   dbRunWithPromise,
@@ -19,8 +18,6 @@ console.log(`自動採番されたID: ${result.lastID}`);
 const row = await dbGetWithPromise(db, "SELECT rowid AS id, title FROM books");
 console.log(`取得したレコード: id: ${row.id}, title: ${row.title}`);
 await dbRunWithPromise(db, "DROP TABLE books");
-
-await timers.setTimeout(100);
 
 // エラーありのプログラム
 await dbRunWithPromise(db, "CREATE TABLE books (title TEXT NOT NULL UNIQUE)");
