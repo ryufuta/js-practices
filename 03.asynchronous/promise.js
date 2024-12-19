@@ -31,4 +31,4 @@ dbRunWithPromise(db, "CREATE TABLE books (title TEXT NOT NULL UNIQUE)")
     console.error(`レコード取得時のエラー: ${error.message}`);
     return dbRunWithPromise(db, "DROP TABLE books");
   })
-  .finally(() => db.close());
+  .then(() => db.close());
