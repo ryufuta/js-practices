@@ -1,6 +1,10 @@
 import timers from "timers/promises";
 import sqlite3 from "sqlite3";
-import { dbRunWithPromise, dbGetWithPromise } from "./lib/sqlite3_promise.js";
+import {
+  dbRunWithPromise,
+  dbGetWithPromise,
+  dbCloseWithPromise,
+} from "./lib/sqlite3_promise.js";
 
 const db = new sqlite3.Database(":memory:");
 
@@ -31,4 +35,4 @@ try {
   console.error(`レコード取得時のエラー: ${error.message}`);
 }
 await dbRunWithPromise(db, "DROP TABLE books");
-db.close();
+dbCloseWithPromise(db);
