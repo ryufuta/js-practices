@@ -24,12 +24,20 @@ await dbRunWithPromise(db, "CREATE TABLE books (title TEXT NOT NULL UNIQUE)");
 try {
   await dbRunWithPromise(db, "INSERT INTO books VALUES (?)", null);
 } catch (error) {
-  console.error(`レコード追加時のエラー: ${error.message}`);
+  if (error.name === "Error") {
+    console.error(`レコード追加時のエラー: ${error.message}`);
+  } else {
+    throw error;
+  }
 }
 try {
   await dbGetWithPromise(db, "SELECT content FROM books");
 } catch (error) {
-  console.error(`レコード取得時のエラー: ${error.message}`);
+  if (error.name === "Error") {
+    console.error(`レコード取得時のエラー: ${error.message}`);
+  } else {
+    throw error;
+  }
 }
 await dbRunWithPromise(db, "DROP TABLE books");
 dbCloseWithPromise(db);
