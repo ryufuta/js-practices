@@ -40,4 +40,4 @@ try {
   }
 }
 await dbRunWithPromise(db, "DROP TABLE books");
-dbCloseWithPromise(db);
+await dbCloseWithPromise(db);
