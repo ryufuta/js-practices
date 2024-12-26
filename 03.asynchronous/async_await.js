@@ -24,7 +24,7 @@ await dbRunWithPromise(db, "CREATE TABLE books (title TEXT NOT NULL UNIQUE)");
 try {
   await dbRunWithPromise(db, "INSERT INTO books VALUES (?)", null);
 } catch (error) {
-  if (error?.name === "Error") {
+  if (error instanceof Error && error.name === "Error") {
     console.error(`レコード追加時のエラー: ${error.message}`);
   } else {
     throw error;
@@ -33,7 +33,7 @@ try {
 try {
   await dbGetWithPromise(db, "SELECT content FROM books");
 } catch (error) {
-  if (error?.name === "Error") {
+  if (error instanceof Error && error.name === "Error") {
     console.error(`レコード取得時のエラー: ${error.message}`);
   } else {
     throw error;
