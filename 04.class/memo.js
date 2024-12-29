@@ -1,38 +1,25 @@
 #!/usr/bin/env node
 
-import enquirer from "enquirer";
 import minimist from "minimist";
 import { Memo } from "./lib/memo.js";
+import { View } from "./lib/view.js";
 
 const params = minimist(process.argv.slice(2));
 await Memo.createTable();
+const view = new View();
 
 if (params.l) {
   const memos = await Memo.all();
-  memos.forEach((memo) => {
-    console.log(memo.title);
-  });
+  view.printMemos(memos);
 } else if (params.r) {
   const memos = await Memo.all();
-  const titles = memos.map((memo) => memo.title);
-  const prompt = new enquirer.Select({
-    name: "memo",
-    message: "Choose a memo you want to see:",
-    choices: titles,
-  });
-  const selectedTitle = await prompt.run();
+  const selectedTitle = await view.displayMemoSelectionPrompt(memos, "r");
 
   const selectedMemo = await Memo.findByTitle(selectedTitle);
-  console.log(`${selectedMemo.title}\n${selectedMemo.content}`);
+  view.printMemo(selectedMemo);
 } else if (params.d) {
   const memos = await Memo.all();
-  const titles = memos.map((memo) => memo.title);
-  const prompt = new enquirer.Select({
-    name: "memo",
-    message: "Choose a memo you want to delete:",
-    choices: titles,
-  });
-  const selectedTitle = await prompt.run();
+  const selectedTitle = await view.displayMemoSelectionPrompt(memos, "d");
 
   await Memo.deleteByTitle(selectedTitle);
 } else {
