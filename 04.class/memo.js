@@ -1,33 +1,19 @@
 #!/usr/bin/env node
 
-import timers from "timers/promises";
 import enquirer from "enquirer";
 import minimist from "minimist";
-import sqlite3 from "sqlite3";
+import { Memo } from "./lib/memo.js";
 
 const params = minimist(process.argv.slice(2));
-const db = new sqlite3.Database("memo.sqlite3");
-db.serialize(() => {
-  db.run(
-    "CREATE TABLE IF NOT EXISTS memos (title TEXT NOT NULL UNIQUE CHECK(title != ''), content TEXT)",
-  );
-});
+await Memo.createTable();
 
 if (params.l) {
-  db.serialize(() => {
-    db.each("SELECT title FROM memos", (_, row) => {
-      console.log(row.title);
-    });
+  const memos = await Memo.all();
+  memos.forEach((memo) => {
+    console.log(memo.title);
   });
 } else if (params.r) {
-  let memos;
-  db.serialize(() => {
-    db.all("SELECT * FROM memos", (_, rows) => {
-      memos = rows;
-    });
-  });
-
-  await timers.setTimeout(100);
+  const memos = await Memo.all();
   const titles = memos.map((memo) => memo.title);
   const prompt = new enquirer.Select({
     name: "memo",
@@ -36,17 +22,10 @@ if (params.l) {
   });
   const selectedTitle = await prompt.run();
 
-  const selectedMemo = memos.filter((memo) => memo.title === selectedTitle)[0];
+  const selectedMemo = await Memo.findByTitle(selectedTitle);
   console.log(`${selectedMemo.title}\n${selectedMemo.content}`);
 } else if (params.d) {
-  let memos;
-  db.serialize(() => {
-    db.all("SELECT * FROM memos", (_, rows) => {
-      memos = rows;
-    });
-  });
-
-  await timers.setTimeout(100);
+  const memos = await Memo.all();
   const titles = memos.map((memo) => memo.title);
   const prompt = new enquirer.Select({
     name: "memo",
@@ -55,9 +34,7 @@ if (params.l) {
   });
   const selectedTitle = await prompt.run();
 
-  db.serialize(() => {
-    db.run("DELETE FROM memos WHERE title == (?)", selectedTitle);
-  });
+  await Memo.deleteByTitle(selectedTitle);
 } else {
   const buffers = [];
   for await (const chunk of process.stdin) {
@@ -67,9 +44,7 @@ if (params.l) {
   const title = rows[0];
   const content = rows.slice(1).join("\n");
 
-  db.serialize(() => {
-    db.run("INSERT INTO memos VALUES (?, ?)", [title, content]);
-  });
+  await Memo.create(title, content);
 }
 
-db.close();
+await Memo.close();
