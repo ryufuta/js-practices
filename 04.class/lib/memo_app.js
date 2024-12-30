@@ -73,6 +73,14 @@ export class MemoApp {
     const title = rows[0];
     const content = rows.slice(1).join("\n");
 
-    await Memo.create(title, content);
+    try {
+      await Memo.create(title, content);
+    } catch (error) {
+      if (error instanceof Error && error.code === "SQLITE_CONSTRAINT") {
+        console.error(error.message);
+      } else {
+        throw error;
+      }
+    }
   }
 }
