@@ -26,11 +26,20 @@ export class MemoApp {
 
   async #printMemos() {
     const memos = await Memo.all();
-    this.#view.printMemos(memos);
+    if (memos.length === 0) {
+      this.#view.printNoMemo();
+    } else {
+      this.#view.printMemos(memos);
+    }
   }
 
   async #printMemo() {
     const memos = await Memo.all();
+    if (memos.length === 0) {
+      this.#view.printNoMemo();
+      return;
+    }
+
     const selectedTitle = await this.#view.displayMemoSelectionPrompt(
       memos,
       "r",
@@ -42,6 +51,11 @@ export class MemoApp {
 
   async #deleteMemo() {
     const memos = await Memo.all();
+    if (memos.length === 0) {
+      this.#view.printNoMemo();
+      return;
+    }
+
     const selectedTitle = await this.#view.displayMemoSelectionPrompt(
       memos,
       "d",

@@ -22,4 +22,8 @@ export class View {
   printMemo(memo) {
     console.log(`${memo.title}\n${memo.content}`);
   }
+
+  printNoMemo() {
+    console.error("メモがありません");
+  }
 }
