@@ -23,7 +23,7 @@ export class View {
     console.log(`${memo.title}\n${memo.content}`);
   }
 
-  printNoMemo() {
+  printNoMemos() {
     console.error("メモがありません");
   }
 }

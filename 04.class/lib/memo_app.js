@@ -27,7 +27,7 @@ export class MemoApp {
   async #printMemos() {
     const memos = await Memo.all();
     if (memos.length === 0) {
-      this.#view.printNoMemo();
+      this.#view.printNoMemos();
     } else {
       this.#view.printMemos(memos);
     }
@@ -36,7 +36,7 @@ export class MemoApp {
   async #printMemo() {
     const memos = await Memo.all();
     if (memos.length === 0) {
-      this.#view.printNoMemo();
+      this.#view.printNoMemos();
       return;
     }
 
@@ -52,7 +52,7 @@ export class MemoApp {
   async #deleteMemo() {
     const memos = await Memo.all();
     if (memos.length === 0) {
-      this.#view.printNoMemo();
+      this.#view.printNoMemos();
       return;
     }
 
