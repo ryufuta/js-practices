@@ -12,7 +12,7 @@ export class Memo {
 
   static all() {
     return new Promise((resolve, reject) => {
-      this.db.all("SELECT * FROM memos", (error, rows) => {
+      this.db.all("SELECT * FROM memos ORDER BY rowid ASC", (error, rows) => {
         if (error) {
           reject(error);
         } else {
