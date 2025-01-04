@@ -45,8 +45,8 @@ export class MemoApp {
       "r",
     );
 
-    const selectedMemo = await Memo.findByTitle(selectedTitle);
-    this.#view.printMemo(selectedMemo);
+    const memo = await Memo.findByTitle(selectedTitle);
+    this.#view.printMemo(memo);
   }
 
   async #deleteMemo() {
