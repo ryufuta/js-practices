@@ -67,7 +67,7 @@ export class MemoApp {
     try {
       await Memo.create(title, content);
     } catch (error) {
-      if (error instanceof Error && error.code === "SQLITE_CONSTRAINT") {
+      if (error.code === "SQLITE_CONSTRAINT") {
         console.error(error.message);
       } else {
         throw error;
