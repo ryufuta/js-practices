@@ -34,32 +34,22 @@ export class MemoApp {
   }
 
   async #printMemo() {
-    const memos = await Memo.all();
-    if (memos.length === 0) {
+    const selectedTitle = await this.#displayMemoSelectionPrompt("see");
+    if (!selectedTitle) {
       this.#view.printNoMemos();
       return;
     }
-
-    const selectedTitle = await this.#view.displayMemoSelectionPrompt(
-      memos,
-      "see",
-    );
 
     const memo = await Memo.findByTitle(selectedTitle);
     this.#view.printMemo(memo);
   }
 
   async #deleteMemo() {
-    const memos = await Memo.all();
-    if (memos.length === 0) {
+    const selectedTitle = await this.#displayMemoSelectionPrompt("delete");
+    if (!selectedTitle) {
       this.#view.printNoMemos();
       return;
     }
-
-    const selectedTitle = await this.#view.displayMemoSelectionPrompt(
-      memos,
-      "delete",
-    );
 
     await Memo.deleteByTitle(selectedTitle);
   }
@@ -83,5 +73,14 @@ export class MemoApp {
         throw error;
       }
     }
+  }
+
+  async #displayMemoSelectionPrompt(act) {
+    const memos = await Memo.all();
+    let selectedTitle;
+    if (memos.length > 0) {
+      selectedTitle = await this.#view.displayMemoSelectionPrompt(memos, act);
+    }
+    return selectedTitle;
   }
 }
