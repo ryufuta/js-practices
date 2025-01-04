@@ -69,9 +69,10 @@ export class MemoApp {
     for await (const chunk of process.stdin) {
       buffers.push(chunk);
     }
-    const rows = Buffer.concat(buffers).toString().split("\n");
-    const title = rows[0];
-    const content = rows.slice(1).join("\n");
+    const [title, ...contentRows] = Buffer.concat(buffers)
+      .toString()
+      .split("\n");
+    const content = contentRows.join("\n");
 
     try {
       await Memo.create(title, content);
