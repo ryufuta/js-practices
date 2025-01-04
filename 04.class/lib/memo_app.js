@@ -42,7 +42,7 @@ export class MemoApp {
 
     const selectedTitle = await this.#view.displayMemoSelectionPrompt(
       memos,
-      "r",
+      "see",
     );
 
     const memo = await Memo.findByTitle(selectedTitle);
@@ -58,7 +58,7 @@ export class MemoApp {
 
     const selectedTitle = await this.#view.displayMemoSelectionPrompt(
       memos,
-      "d",
+      "delete",
     );
 
     await Memo.deleteByTitle(selectedTitle);
