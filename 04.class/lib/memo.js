@@ -4,7 +4,7 @@ export class Memo {
   static #db = null;
 
   static get db() {
-    if (this.#db === null) {
+    if (!this.#db) {
       this.#db = new sqlite3.Database("memo.sqlite3");
     }
     return this.#db;
@@ -13,10 +13,10 @@ export class Memo {
   static all() {
     return new Promise((resolve, reject) => {
       this.db.all("SELECT * FROM memos", (error, rows) => {
-        if (error === null) {
-          resolve(rows);
-        } else {
+        if (error) {
           reject(error);
+        } else {
+          resolve(rows);
         }
       });
     });
@@ -28,10 +28,10 @@ export class Memo {
         "INSERT INTO memos VALUES (?, ?)",
         [title, content],
         (error) => {
-          if (error === null) {
-            resolve();
-          } else {
+          if (error) {
             reject(error);
+          } else {
+            resolve();
           }
         },
       );
@@ -44,10 +44,10 @@ export class Memo {
         "SELECT * FROM memos WHERE title == (?)",
         title,
         (error, row) => {
-          if (error === null) {
-            resolve(row);
-          } else {
+          if (error) {
             reject(error);
+          } else {
+            resolve(row);
           }
         },
       );
@@ -57,10 +57,10 @@ export class Memo {
   static deleteByTitle(title) {
     return new Promise((resolve, reject) => {
       this.db.run("DELETE FROM memos WHERE title == (?)", title, (error) => {
-        if (error === null) {
-          resolve();
-        } else {
+        if (error) {
           reject(error);
+        } else {
+          resolve();
         }
       });
     });
@@ -69,10 +69,10 @@ export class Memo {
   static close() {
     return new Promise((resolve, reject) => {
       this.db.close((error) => {
-        if (error === null) {
-          resolve();
-        } else {
+        if (error) {
           reject(error);
+        } else {
+          resolve();
         }
       });
     });
@@ -83,10 +83,10 @@ export class Memo {
       this.db.run(
         "CREATE TABLE IF NOT EXISTS memos (title TEXT NOT NULL UNIQUE CHECK(title != ''), content TEXT)",
         (error) => {
-          if (error === null) {
-            resolve();
-          } else {
+          if (error) {
             reject(error);
+          } else {
+            resolve();
           }
         },
       );
