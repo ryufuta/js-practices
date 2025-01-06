@@ -68,21 +68,15 @@ export class MemoApp {
   }
 
   async #selectAndHandleMemo(act, callback) {
-    const selectedID = await this.#displayMemoSelectionPrompt(act);
-    if (!selectedID) {
-      this.#view.printNoMemos();
-      return;
-    }
-
-    return callback(selectedID);
-  }
-
-  async #displayMemoSelectionPrompt(act) {
     const memos = await Memo.all();
-    let selectedID;
     if (memos.length > 0) {
-      selectedID = await this.#view.displayMemoSelectionPrompt(memos, act);
+      const selectedID = await this.#view.displayMemoSelectionPrompt(
+        memos,
+        act,
+      );
+      return callback(selectedID);
     }
-    return selectedID;
+
+    this.#view.printNoMemos();
   }
 }
