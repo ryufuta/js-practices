@@ -26,10 +26,10 @@ export class MemoApp {
 
   async #printMemos() {
     const memos = await Memo.all();
-    if (memos.length === 0) {
-      this.#view.printNoMemos();
-    } else {
+    if (memos.length > 0) {
       this.#view.printMemos(memos);
+    } else {
+      this.#view.printNoMemos();
     }
   }
 
