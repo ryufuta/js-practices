@@ -12,13 +12,16 @@ export class Memo {
 
   static all() {
     return new Promise((resolve, reject) => {
-      this.db.all("SELECT * FROM memos ORDER BY rowid ASC", (error, rows) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(rows);
-        }
-      });
+      this.db.all(
+        "SELECT rowid, * FROM memos ORDER BY rowid ASC",
+        (error, rows) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(rows);
+          }
+        },
+      );
     });
   }
 
@@ -38,11 +41,11 @@ export class Memo {
     });
   }
 
-  static findByTitle(title) {
+  static find(id) {
     return new Promise((resolve, reject) => {
       this.db.get(
-        "SELECT * FROM memos WHERE title == (?)",
-        title,
+        "SELECT rowid, * FROM memos WHERE rowid == (?)",
+        id,
         (error, row) => {
           if (error) {
             reject(error);
@@ -54,9 +57,9 @@ export class Memo {
     });
   }
 
-  static deleteByTitle(title) {
+  static delete(id) {
     return new Promise((resolve, reject) => {
-      this.db.run("DELETE FROM memos WHERE title == (?)", title, (error) => {
+      this.db.run("DELETE FROM memos WHERE rowid == (?)", id, (error) => {
         if (error) {
           reject(error);
         } else {

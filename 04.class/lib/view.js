@@ -8,11 +8,17 @@ export class View {
   }
 
   displayMemoSelectionPrompt(memos, act) {
-    const titles = memos.map((memo) => memo.title);
+    const choices = memos.map((memo) => {
+      return { name: memo.title, value: memo.rowid };
+    });
     const prompt = new enquirer.Select({
       name: "memo",
       message: `Choose a memo you want to ${act}:`,
-      choices: titles,
+      choices: choices,
+      result(title) {
+        const id = this.map(title)[title];
+        return id;
+      },
     });
     return prompt.run();
   }

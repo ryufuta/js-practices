@@ -34,24 +34,24 @@ export class MemoApp {
   }
 
   async #printMemo() {
-    const selectedTitle = await this.#displayMemoSelectionPrompt("see");
-    if (!selectedTitle) {
+    const selectedID = await this.#displayMemoSelectionPrompt("see");
+    if (!selectedID) {
       this.#view.printNoMemos();
       return;
     }
 
-    const memo = await Memo.findByTitle(selectedTitle);
+    const memo = await Memo.find(selectedID);
     this.#view.printMemo(memo);
   }
 
   async #deleteMemo() {
-    const selectedTitle = await this.#displayMemoSelectionPrompt("delete");
-    if (!selectedTitle) {
+    const selectedID = await this.#displayMemoSelectionPrompt("delete");
+    if (!selectedID) {
       this.#view.printNoMemos();
       return;
     }
 
-    await Memo.deleteByTitle(selectedTitle);
+    await Memo.delete(selectedID);
   }
 
   async #createMemo() {
@@ -77,10 +77,10 @@ export class MemoApp {
 
   async #displayMemoSelectionPrompt(act) {
     const memos = await Memo.all();
-    let selectedTitle;
+    let selectedID;
     if (memos.length > 0) {
-      selectedTitle = await this.#view.displayMemoSelectionPrompt(memos, act);
+      selectedID = await this.#view.displayMemoSelectionPrompt(memos, act);
     }
-    return selectedTitle;
+    return selectedID;
   }
 }
