@@ -9,7 +9,7 @@ export class View {
 
   displayMemoSelectionPrompt(memos, act) {
     const choices = memos.map((memo) => {
-      return { name: memo.title, value: memo.rowid };
+      return { name: memo.title, value: memo.id };
     });
     const prompt = new enquirer.Select({
       name: "memo",
