@@ -15,9 +15,8 @@ export class View {
       name: "memo",
       message: `Choose a memo you want to ${act}:`,
       choices,
-      result(title) {
-        const id = this.map(title)[title];
-        return id;
+      result() {
+        return this.focused.value;
       },
     });
     return prompt.run();
