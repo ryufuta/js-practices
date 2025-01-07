@@ -34,16 +34,14 @@ export class MemoApp {
   }
 
   async #printMemo() {
-    await this.#selectAndHandleMemo("see", async (selectedId) => {
+    await this.#selectMemo("see", async (selectedId) => {
       const memo = await Memo.find(selectedId);
       this.#view.printMemo(memo);
     });
   }
 
   async #deleteMemo() {
-    await this.#selectAndHandleMemo("delete", (selectedId) =>
-      Memo.delete(selectedId),
-    );
+    await this.#selectMemo("delete", (selectedId) => Memo.delete(selectedId));
   }
 
   async #createMemo() {
@@ -67,7 +65,7 @@ export class MemoApp {
     }
   }
 
-  async #selectAndHandleMemo(act, callback) {
+  async #selectMemo(act, callback) {
     const memos = await Memo.all();
     if (memos.length > 0) {
       const selectedId = await this.#view.displayMemoSelectionPrompt(
