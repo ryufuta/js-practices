@@ -1,7 +1,7 @@
 import { Memo } from "./memo.js";
 import { View } from "./view.js";
 
-export class MemoApp {
+export class App {
   #view = null;
 
   constructor() {
