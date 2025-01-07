@@ -14,7 +14,7 @@ export class View {
     const prompt = new enquirer.Select({
       name: "memo",
       message: `Choose a memo you want to ${act}:`,
-      choices: choices,
+      choices,
       result(title) {
         const id = this.map(title)[title];
         return id;
